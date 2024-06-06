@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
+use Storage;
 use Validator;
 
 class JurusanController extends Controller
@@ -28,12 +29,16 @@ class JurusanController extends Controller
         //validate form
         $this->validate($request, [
             'nama_jurusan' => 'required',
+            'image' => 'required|image|mimes:jpeg,jpg,png|max:2048',
 
         ]);
 
         $jurusan = new jurusan();
         $jurusan->nama_jurusan = $request->nama_jurusan;
-
+         // image
+         $image = $request->file('image');
+         $image->storeAs('public/jurusans', $image->hashName());
+         $jurusan->image = $image->hashName();
         $jurusan->save();
         return redirect()->route('jurusan.index');
     }
@@ -48,31 +53,39 @@ class JurusanController extends Controller
     public function edit($id)
     {
         //edit
-        $jurusan = Jurusan::findOrFail($id);
+        $jurusan = jurusan::findOrFail($id);
         return view('jurusan.edit', compact('jurusan'));
     }
 
     public function update(Request $request, $id)
 {
     // Validate form
-    $this->validate($request, [
+    $request->validate([
         'nama_jurusan' => 'required',
+        'image' => 'image|file|max:1024'
     ]);
 
+    $jurusan=jurusan::findOrFail($id);
+        $jurusan->nama_jurusan = $request->nama_jurusan;
+        //upload jurusan
+        $image=$request->file('image');
+        $image->storeAs('public/jurusans', $image->hashName());
 
-    // Find the jurusan record
-    $jurusan = Jurusan::findOrFail($id);
-    $jurusan->nama_jurusan = $request->nama_jurusan;
+        // delete jurusan
+        Storage::delete('public/jurusans/'. $jurusan->image);
 
-    $jurusan->save();
-    return redirect()->route('jurusan.index');
-}
+    $jurusan->image=$image->hashName();
+        $jurusan->save();
+        return redirect()->route('jurusan.index');
+    }
+
 
 
     public function destroy($id)
     {
         //delete
         $jurusan = Jurusan::findOrFail($id);
+        Storage::delete('public/jurusans/' . $jurusan->image);
         $jurusan->delete();
         return redirect()->route('jurusan.index');
 

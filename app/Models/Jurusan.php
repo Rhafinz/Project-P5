@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Jurusan extends Model
 {
     use HasFactory;
-    protected $fillable = ['nama_jurusan'];
-    protected $visible = ['nama_jurusan'];
+    protected $fillable = ['nama_jurusan', 'image'];
+    protected $visible = ['nama_jurusan', 'image'];
 
     public function siswa()
     {

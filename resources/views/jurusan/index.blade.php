@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 <style>
-
     .card-title {
         font-weight: bold;
         font-size: 1.5rem;
@@ -27,54 +26,58 @@
             <div class="card shadow-lg">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <div class="float-start">
-                            <h4 class="card-title mb-0">{{ __('Data Jurusan') }}</h4>
-                        </div>
-                        <div class="float-end">
-                            <a href="{{ route('jurusan.create') }}" class="btn btn-sm btn-primary">Tambah Data</a>
-                        </div>
+                        <h4 class="card-title mb-0">{{ __('Data Jurusan') }}</h4>
                     </div>
+                    <div class="float-end">
+                        <a href="{{ route('jurusan.create') }}" class="btn btn-sm btn-primary">Tambah Data</a>
+                    </div>
+                </div>
 
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover">
-                                <thead>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Jurusan</th>
+                                    <th>Foto</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php $no = 1; @endphp
+                                @forelse ($jurusan as $data)
                                     <tr>
-                                        <th>No</th>
-                                        <th>Nama Jurusan</th>
-                                        <th>Aksi</th>
+                                        <td>{{ $no++ }}</td>
+                                        <td>{{ $data->nama_jurusan }}</td>
+                                        <td>
+                                            <img src="{{ asset('/storage/jurusans/' . $data->image) }}" class="rounded">
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('kelas.destroy', $data->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <a href="{{ route('kelas.edit', $data->id) }}"
+                                                    class="btn btn-sm btn-success">Edit</a>
+                                                |
+                                                <button type="submit" onsubmit="return confirm('Are You Sure ?');"
+                                                    class="btn btn-sm btn-danger">Delete</button>
+                                            </form>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @php $no = 1; @endphp
-                                    @forelse ($jurusan as $data)
-                                        <tr>
-                                            <td>{{ $no++ }}</td>
-                                            <td>{{ $data->nama_jurusan }}</td>
-                                            <td>
-                                                <form action="{{ route('jurusan.destroy', $data->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <a href="{{ route('jurusan.edit', $data->id) }}"
-                                                        class="btn btn-sm btn-success">Edit</a>
-                                                    |
-                                                    <button type="submit" onsubmit="return confirm('Are You Sure ?');"
-                                                        class="btn btn-sm btn-danger">Delete</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="5" class="text-center">
-                                                Data belum tersedia.
-                                            </td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="text-center">
+                                            Data belum tersedia.
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection

@@ -29,11 +29,11 @@
         }
 
         .navbar {
-            background-color: #007bff;
+            background-color: #dff709;
         }
 
         .navbar-brand, .nav-link {
-            color: #fff !important;
+            color: #0a0a0a !important;
         }
 
         .navbar-brand:hover, .nav-link:hover {

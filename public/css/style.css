@@ -1,9 +1,112 @@
 body {
     font-family: 'Poppins', sans-serif;
-
-    color: #48494a;
+    background-color: #f3f4f6;
+    margin: 0;
+    padding: 0;
     background-image: url(../images/body-bg.jpg);
   }
+
+  .header_section {
+    background-color: #fff; /* Ganti dengan warna latar belakang yang diinginkan */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+    transition: top 0.3s; /* Efek transisi */
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Atur z-index agar navbar selalu muncul di atas konten lain */
+}
+
+.header_section.hidden {
+    top: -100px;
+}
+
+.header_section.navbar-hidden {
+    transform: translateY(-100%);
+}
+
+.navbar {
+    transition: all 0.3s ease; /* Efek transisi */
+    transition-delay: 0.3s; /* Delay untuk memastikan efek transisi berjalan setelah navbar muncul */
+}
+
+.navbar-toggler {
+    border-color: transparent; /* Ganti warna border jika diperlukan */
+}
+
+.navbar-toggler-icon {
+    background-image: url('path/to/your-icon.svg'); /* Ganti dengan path menu toggler icon */
+}
+
+.navbar-nav {
+    transition: all 0.3s ease; /* Efek transisi */
+}
+
+/* Animasi */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+.header_section {
+    animation: slideDown 0.5s ease forwards;
+}
+
+.header_section.navbar-hidden {
+    animation: slideUp 0.5s ease forwards;
+}
+
+
+.navbar-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10px; /* Sesuaikan dengan ketebalan yang diinginkan */
+    display: flex;
+    justify-content: space-between;
+}
+
+.color-box {
+    width: 20%;
+    height: 100%;
+    transition: background-color 0.3s;
+}
+
+.color-box:nth-child(1) {
+    background-color: #003572; /* Merah */
+}
+
+.color-box:nth-child(2) {
+    background-color: #ffa500; /* Jingga */
+}
+
+.color-box:nth-child(3) {
+    background-color: #ffff00; /* Kuning */
+}
+
+.color-box:nth-child(4) {
+    background-color: #008000; /* Hijau */
+}
+
+.color-box:nth-child(5) {
+    background-color: #a70000; /* Biru */
+}
+
+.color-box:nth-child(6) {
+    background-color: #4b0082; /* Ungu */
+}
 
   .layout_padding {
     padding: 75px 0;
@@ -50,6 +153,8 @@ body {
     transition: all 0.3s ease 0s;
   }
 
+
+
   .call_to-btn:hover,
   .btn_on-hover:hover {
     color: #fff;
@@ -66,141 +171,56 @@ body {
     text-align: center;
   }
 
-  /*header section*/
-
-  .header_section {
-    padding-top: 10px;
-  }
-
-  nav.navbar.navbar-expand-md {
-
-    padding: 10px 0;
-  }
-
-  .custom_nav-container.navbar-expand-lg .navbar-nav .nav-link {
-    padding: 10px 20px;
-    color: #2d2c2c;
-    font-size: 15px;
-    text-align: center;
-    text-transform: uppercase;
-  }
-
-  .custom_nav-container.navbar-expand-lg .navbar-nav .nav-item.active .nav-link {
-    color: #232323;
-  }
-
-  /* Tambahkan atau ubah yang ada di bawah ini untuk memindahkan gambar hero lebih ke atas */
-.hero_section {
-    padding-top: 0; /* Kurangi padding atas untuk menggeser bagian hero lebih ke atas */
-    padding-bottom: 75px; /* Kamu bisa menyesuaikan padding bawah jika diperlukan */
-}
-
-.hero-container {
-    display: flex;
-    align-items: flex-start; /* Ini akan menggeser elemen di dalam hero container ke atas */
-    padding-top: 30px; /* Kamu bisa menyesuaikan padding atas ini sesuai kebutuhan */
-    padding-bottom: 75px;
-}
-
-.hero_img-container {
-    width: 55%;
-    margin-top: -150px; /* Nilai negatif untuk menggeser gambar lebih ke atas */
-    /* Sesuaikan margin-top sesuai kebutuhan */
-}
-
-.hero_detail-box {
-    width: 45%;
-}
-
-
-  a,
-  a:hover,
-  a:focus {
-    text-decoration: none;
-  }
-
-  a:hover,
-  a:focus {
-    color: initial;
-  }
-
-  .btn,
-  .btn:focus {
-    outline: none !important;
-    box-shadow: none;
-  }
-
-  .top_container {
-    height: 95vh;
-    position: relative;
-  }
 
   .top_container::before {
     content: "";
     position: absolute;
-    width: 48%;
-    height: 100%;
+    width: 53%;
+    height: 103%;
     background: url(../images/hero-bg.png);
     background-size: cover;
     background-position: right bottom;
     background-repeat: no-repeat;
     z-index: -1;
+    margin-left: -5%;
+    margin-top: 7%;
   }
 
-  .top_container.sub_pages::before {
-    background-size: 400px 200px;
-    background-position: top left;
-  }
+  .card {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
 
-  .top_container.sub_pages {
-    height: 35vh;
-  }
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
 
-  .top_container.sub_page {
-    height: auto;
-  }
+.card-img-top {
+    border-bottom: 1px solid #e0e0e0;
+}
 
-  .navbar-brand img {
-    width: 75px;
-    margin-right: 7px;
-  }
+.card-body {
+    padding: 20px;
+}
 
+.card-title {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 0;
+}
 
-  .custom_nav-container .nav_search-btn {
-    background-size: 22px;
-    background-repeat: no-repeat;
-    background-position-y: 7px;
-    width: 35px;
-    height: 35px;
-    padding: 0;
-    border: none;
-  }
+.shadow-sm {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  .navbar-brand {
-    display: flex;
-    align-items: center;
-  }
+.text-center {
+    text-align: center;
+}
 
-  .navbar-brand span {
-    font-size: 20px;
-    font-weight: 700;
-    color: #fefefe;
-  }
-
-  .custom_nav-container {
-    z-index: 99999;
-    padding: 15px 0;
-  }
-
-  .custom_nav-container .navbar-toggler {
-    outline: none;
-  }
-
-  .custom_nav-container .navbar-toggler .navbar-toggler-icon {
-    background-size: 40px;
-  }
-
-  /*end header section*/
 
   /* hero section */
   .hero-container {
@@ -246,9 +266,10 @@ body {
   /* about section */
 
   /* teacher container */
-  .teacher_section .card {
+.teacher_section .card {
     border: none;
     background-color: transparent;
+    width: 75%;
   }
 
   .teacher_section .card-title {
@@ -433,20 +454,99 @@ body {
 
   /* footer section*/
 
-  .footer_section {
-    background-color: #082465;
-    padding: 20px 0;
-    font-family: "Roboto", sans-serif;
-  }
+  .footer {
+    background: #0063e4;
+    color: #ffffff;
+    padding: 40px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
 
-  .footer_section p {
-    color: #fdfdfe;
-    margin: 0;
+.footer .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.footer .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.footer-col {
+    flex: 1;
+    margin: 10px;
+    min-width: 200px;
+}
+
+.footer-col h4 {
+    font-size: 18px;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-weight: 600;
+    position: relative;
+}
+
+.footer-col ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    color: #b3b3b3;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    color: #ffffff;
+}
+
+.footer-col .social-links {
+    display: flex;
+    align-items: center;
+}
+
+.footer-col .social-links a {
+    margin-right: 10px;
+    font-size: 20px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-col .social-links a:hover {
+    color: #ffffff;
+}
+
+.footer-bottom {
     text-align: center;
-  }
+    padding: 20px 0;
+    border-top: 1px solid #000e8b;
+    margin-top: 40px;
+    font-size: 14px;
+}
 
-  .footer_section a {
-    color: #fdfdfe;
-  }
+@media (max-width: 768px) {
+    .footer .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-col {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin: 10px 0;
+    }
+}
+
 
   /* end footer section*/

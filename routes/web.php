@@ -13,9 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
+Route::get('/profil', function () {
+    return view('profil');
+});
+Route::resource('/', App\Http\Controllers\FrontController::class);
 
 Auth::routes();
 
